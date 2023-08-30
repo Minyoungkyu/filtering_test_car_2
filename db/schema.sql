@@ -169,3 +169,18 @@ minPrice = 4900,
 maxPrice = 5900,
 imgUrl = 'https://img1.daumcdn.net/thumb/S720x440ht.u/?fname=%2Fmedia%2Fvitraya%2Fauto%2Fimage%2Fc613a8%2FACCA5CB0E3B872BDCEABC3973A2B26611BC8303DD0574AAA15_85GK&scode=media'
 ;
+
+
+DROP TABLE carDetail;
+
+CREATE TABLE carDetail (
+id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`name` CHAR(50) NOT NULL,
+`btnUrl` TEXT NOT NULL,
+`imgUrl` TEXT NOT NULL
+);
+
+INSERT INTO carDetail
+SET `name` = '얼씨 브래스 메탈릭 매트',
+btnUrl = 'https://www.hyundai.com/contents/vr360/MX03/exterior/YBM/colorchip-exterior.png',
+imgUrl = 'https://www.hyundai.com/contents/vr360/MX03/exterior/YBM/001.png';

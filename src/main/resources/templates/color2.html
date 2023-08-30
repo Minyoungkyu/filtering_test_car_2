@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+
+<h1>Colors</h1>
+
+<div class="bgImg">
+    <img class="carImg" src="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png" alt="">
+</div>
+
+<div class="colorListContainer" style="margin-top: 10px; overflow: hidden;">
+    <div class="colorList">
+        <div th:each="carDetail : ${carDetails}" th:id="${carDetail.color}" th:style="background-image : url('https://www.hyundai.com/contents/vr360/MX03/exterior/YBM/colorchip-exterior.png');" th:data-img-url="${carDetail.imgUrl}" class="colorDiv">날 눌러라</div>
+        <div th:each="carDetail : ${carDetails}" th:id="${carDetail.color}" th:style="'background-color: ' + ${carDetail.color}" th:data-img-url="${carDetail.imgUrl}" class="colorDiv">날 눌러라</div>
+
+        <!-- 위와 같이 다수의 색상 요소를 추가 -->
+    </div>
+</div>
+
+<style>
+    .bgImg {
+        background-image: url('https://www.hyundai.com/static/images/model/santafe/23fc/the_all_new_santafe_colors_exterior_bg.jpg');
+        width: 1600px;
+        height: 560px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .colorListContainer {
+        width: 1600px;
+        overflow: hidden;
+    }
+
+    .colorList {
+        display: flex;
+        margin-top: 0;
+        margin-bottom: 20px; /* 스크롤바와의 간격 조절 */
+        width: max-content;
+    }
+
+    .colorList > div {
+        width: 190px;
+        height: 90px;
+        border: 1px solid black;
+        margin: 0 2px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+<!--        background-image : url('https://www.hyundai.com/contents/vr360/MX03/exterior/YBM/colorchip-exterior.png');-->
+    }
+
+     /* 커스텀 스크롤 스타일링 */
+        .colorListContainer::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .colorListContainer::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .colorListContainer::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+</style>
+
+<script>
+    $(document).ready(function() {
+        var colorListContainer = $(".colorListContainer");
+        var colorList = $(".colorList");
+
+        $(".colorDiv").on("click", function() {
+            var imgUrl = $(this).attr("data-img-url");
+            $(".carImg").attr("src", imgUrl);
+
+            // 스크롤 위치 조정
+            var containerWidth = colorListContainer.width();
+            var selectedDiv = $(this);
+            var selectedDivOffset = selectedDiv.offset().left;
+            var scrollOffset = selectedDivOffset - (containerWidth / 2) + (selectedDiv.width() / 2);
+            colorListContainer.scrollLeft(scrollOffset);
+        });
+
+        if (colorList.width() > colorListContainer.width()) {
+            colorListContainer.css("overflow-x", "scroll");
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="bgImg">
+        <img class="carImg" src="https://www.hyundai.com/contents/vr360/MX03/exterior/WW2/001.png" alt="">
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <div class="colorList">
+        <div th:each="carDetail : ${carDetails}" th:id="${carDetail.color}" th:style="'background-color: ' + ${carDetail.color}" th:data-img-url="${carDetail.imgUrl}" class="colorDiv">날 눌러라</div>
+    </div>
+</div>
+
+
+</body>
+
+<style>
+    .bgImg {
+        background-image: url('https://www.hyundai.com/static/images/model/santafe/23fc/the_all_new_santafe_colors_exterior_bg.jpg');
+        width: 1000px;
+        height: 500px;
+    }
+
+    .colorList {
+        display: flex;
+    }
+
+    .colorList>div {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        margin: 0 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        $(".colorDiv").on("click", function() {
+            var imgUrl = $(this).attr("data-img-url");
+            $(".carImg").attr("src", imgUrl);
+        });
+    });
+</script>
+
+</html>
